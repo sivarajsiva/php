@@ -5,7 +5,9 @@ pipeline {
             steps {
                 echo 'build the application'
                 sh """
+                pwd
                 ls -ltrh
+                mv index.php /var/www/html/
                 """
             }
         }
