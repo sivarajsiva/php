@@ -7,7 +7,7 @@ pipeline {
                 sh """
                 pwd
                 ls -ltrh
-                sudo cp index.php /var/www/html/
+                sudo -u ec2-user cp index.php /var/www/html/
                 """
             }
         }
