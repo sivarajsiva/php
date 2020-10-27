@@ -5,9 +5,10 @@ pipeline {
             steps {
                 echo 'build the application'
                 sh """
+                whoami
                 pwd
                 ls -ltrh
-                sudo -u ec2-user cp index.php /var/www/html/
+                cp index.php /var/www/html/
                 """
             }
         }
