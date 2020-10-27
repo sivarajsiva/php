@@ -7,7 +7,7 @@ pipeline {
                 sh """
                 pwd
                 ls -ltrh
-                mv index.php /var/www/html/
+                sudo cp index.php /var/www/html/
                 """
             }
         }
