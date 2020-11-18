@@ -4,12 +4,6 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'build the application'
-                sh """
-                whoami
-                pwd
-                ls -ltrh
-                cp index.php /var/www/html/
-                """
             }
         }
         stage('Test') { 
@@ -17,10 +11,30 @@ pipeline {
                echo 'test the application'
             }
         }
+		stage('SSH transfer') {
+		 script {
+		  sshPublisher(
+		   continueOnError: false, failOnError: true,
+		   publishers: [
+			sshPublisherDesc(
+			 configName: "testing",
+			 verbose: true,
+			 transfers: [
+			  sshTransfer(
+			   sourceFiles: "**/*",
+			   removePrefix: "",
+			   remoteDirectory: "",
+			   execCommand: ""
+			  )
+			 ])
+		   ])
+		 }
+		}
         stage('Deploy') { 
             steps {
                 echo 'deploy the application'
             }
+			
         }
     }
 }
